@@ -71,11 +71,15 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.version}</version>
                 <configuration>
+                <!-- mvn clean test -Dbrowser=chrome -Dselenium.grid.enabled=true to pass values from mvn command line-->
                     <systemPropertyVariables>
+                    <!-- Comment out below when we want to run test on browser specified in xml-->
                         <browser>chrome</browser>
+                        <selenium.grid.enabled>true</selenium.grid.enabled>
                     </systemPropertyVariables>
                     <suiteXmlFiles>
-                        <file>test-suite.xml</file>
+                        <file>src/test/resources/test-suites/vendor-portal.xml</file>
+                        <!-- <file>src/test/resources/test-suites/flight-reservation.xml</file> -->
                     </suiteXmlFiles>
                     <threadCount>1</threadCount>
                     <reportsDirectory>target/test-output</reportsDirectory>

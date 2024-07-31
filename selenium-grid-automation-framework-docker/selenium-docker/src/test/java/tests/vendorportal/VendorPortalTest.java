@@ -10,6 +10,8 @@ import pages.vendorportal.DashboardPage;
 import pages.vendorportal.LoginPage;
 import tests.AbstractTest;
 import tests.vendorportal.model.VendorPortalTestData;
+import util.Config;
+import util.Constants;
 import util.JsonUtil;
 
 public class VendorPortalTest extends AbstractTest{
@@ -28,7 +30,8 @@ public class VendorPortalTest extends AbstractTest{
 	
 	@Test
 	public void loginTest() {
-		loginPage.goTo("https://d1uh9e7cu07ukd.cloudfront.net/selenium-docker/vendor-app/index.html");
+		//loginPage.goTo("https://d1uh9e7cu07ukd.cloudfront.net/selenium-docker/vendor-app/index.html");
+		loginPage.goTo(Config.get(Constants.VENDOR_PORTAL_URL));
 		Assert.assertTrue(loginPage.isAt());
 		loginPage.login(testData.username(), testData.password());
 	}
