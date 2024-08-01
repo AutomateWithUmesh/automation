@@ -1,22 +1,16 @@
-# docker-compose up --scale chrome=3 -d --> to create no. of browsers from command line
-# docker-compose up --scale chrome=2 -d --> automatically kills extra container
-# docker-compose up --scale chrome=2 --scale firefox=2 -d
-
 version: "3"
 services:
   hub:
     image: selenium/hub:4.16
-    ports:
-    - 4444:4444
-    # - 4442:4442
-    # - 4443:4443
+    #ports:
+    #- 4444:4444 --> dont need this as it is for us if we want to open the browser to see the progress and access the hub
   chrome:
     image: selenium/node-chrome:4.16
     shm_size: '2g'
     depends_on:
     - hub
     deploy:
-     replicas: 2
+     replicas: 0 # no. of containers
     environment:
     - SE_EVENT_BUS_HOST=hub
     - SE_EVENT_BUS_PUBLISH_PORT=4442
@@ -37,4 +31,4 @@ services:
     - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
     - SE_NODE_OVERRIDE_MAX_SESSIONS=true
     - SE_NODE_MAX_SESSIONS=4
-    - SE_VNC_NO_PASSWORD=1    
+    - SE_VNC_NO_PASSWORD=1 #to disable password asked at VN session password: secret

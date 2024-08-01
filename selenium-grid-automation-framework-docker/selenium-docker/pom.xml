@@ -79,7 +79,7 @@
                     </systemPropertyVariables>
                     <suiteXmlFiles>
                         <file>src/test/resources/test-suites/vendor-portal.xml</file>
-                        <!-- <file>src/test/resources/test-suites/flight-reservation.xml</file> -->
+                        <file>src/test/resources/test-suites/flight-reservation.xml</file>
                     </suiteXmlFiles>
                     <threadCount>1</threadCount>
                     <reportsDirectory>target/test-output</reportsDirectory>
@@ -111,13 +111,18 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven.jar.version}</version>
                 <configuration>
-                    <outputDirectory>${package.directory}</outputDirectory>
+                    <outputDirectory>${package.directory}/libs</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
                         <goals>
+                        <!-- by default maven will only considers src/main/java and src/main/resource-->
+                        <!-- by default maven will not include src/test/java test classes, hence below goal to include test classes-->
                             <goal>test-jar</goal>
                         </goals>
+                        <configuration>
+                            <includes>**/*.class</includes>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
